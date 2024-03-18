@@ -1,28 +1,20 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-
-import { useColorScheme } from '@/components/useColorScheme';
-
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from 'expo-router';
-
+import { useFonts } from "expo-font";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { useEffect } from "react";
+import * as SplashScreen from "expo-splash-screen";
+import { TouchableOpacity, useColorScheme } from "react-native";
+import { router, Stack } from "expo-router";
+import { useThemeColor } from "@/components/Themed";
+import Colors from "@/constants/Colors";
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
+  initialRouteName: "(drawer)",
 };
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     ...FontAwesome.font,
   });
 
@@ -44,15 +36,37 @@ export default function RootLayout() {
   return <RootLayoutNav />;
 }
 
-function RootLayoutNav() {
-  const colorScheme = useColorScheme();
-
+export function RootLayoutNav() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+        <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="modal"
+          options={{ presentation: "fullScreenModal", headerShown: false }}
+        />
+        <Stack.Screen
+          name="cart"
+          options={{
+            title: "Shopping Cart",
+            presentation: "fullScreenModal",
+            headerShadowVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.light.background,
+            },
+            headerLeft: () => (
+              <TouchableOpacity>
+                <FontAwesome
+                  name="chevron-left"
+                  size={24}
+                  color="black"
+                  onPress={router.back}
+                />
+              </TouchableOpacity>
+            ),
+          }}
+        />
       </Stack>
-    </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }

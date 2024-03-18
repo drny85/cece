@@ -1,35 +1,69 @@
-import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  ImageBackground,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
+import React from "react";
+import { PIC } from "@/constants/pics";
+import { SIZES } from "@/constants/Sizes";
+import { StatusBar } from "expo-status-bar";
+import { router, useLocalSearchParams } from "expo-router";
+import { FontAwesome } from "@expo/vector-icons";
+import Colors from "@/constants/Colors";
+import { useItem } from "@/hooks/item/useItem";
+import ColorSelector from "@/components/item/ColorSelector";
+import SizeSelector from "@/components/item/SizeSelector";
 
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
-
-export default function ModalScreen() {
+const modal = () => {
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const { item, loading } = useItem(id);
+  if (loading) return null;
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Modal</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/modal.tsx" />
-
-      {/* Use a light status bar on iOS to account for the black space above the modal */}
-      <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
+    <View style={{ flex: 1 }}>
+      <StatusBar style="light" />
+      <ImageBackground source={PIC} resizeMode="cover" style={styles.image}>
+        <TouchableOpacity style={styles.back} onPress={router.back}>
+          <FontAwesome
+            name="chevron-left"
+            size={26}
+            color={Colors.light.white}
+          />
+        </TouchableOpacity>
+      </ImageBackground>
+      <ScrollView contentContainerStyle={{ padding: SIZES.padding }}>
+        <View>
+          <Text style={styles.price}>${item?.price}</Text>
+          <View style={{ width: "100%" }}>
+            <ColorSelector
+              showTitle
+              colors={item?.colors!}
+              onColorSelected={() => {}}
+            />
+            <SizeSelector sizes={item?.sizes!} onSizeSelected={() => {}} />
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
-}
+};
+
+export default modal;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  image: {
+    height: SIZES.height * 0.4,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  back: {
+    position: "absolute",
+    top: SIZES.statusBarHeight,
+    left: 20,
+    zIndex: 10,
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  price: {
+    fontSize: 24,
+    fontWeight: "bold",
   },
 });
