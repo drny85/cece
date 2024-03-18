@@ -1,12 +1,11 @@
-import { useFonts } from "expo-font";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { useEffect } from "react";
-import * as SplashScreen from "expo-splash-screen";
-import { TouchableOpacity, useColorScheme } from "react-native";
-import { router, Stack } from "expo-router";
-import { useThemeColor } from "@/components/Themed";
 import Colors from "@/constants/Colors";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { useFonts } from "expo-font";
+import { router, Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from "react";
+import { TouchableOpacity } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
   initialRouteName: "(drawer)",
@@ -42,7 +41,7 @@ export function RootLayoutNav() {
       <Stack>
         <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
         <Stack.Screen
-          name="modal"
+          name="item-details"
           options={{ presentation: "fullScreenModal", headerShown: false }}
         />
         <Stack.Screen

@@ -1,42 +1,81 @@
 import Colors from "@/constants/Colors";
-import { ItemSizes } from "@/typing";
+import { Item } from "@/typing";
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-type Props = {
-  sizes: string[];
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Animated, { FadeInDown, FadeOut } from "react-native-reanimated";
+
+type SizeSelectorProps = {
+  item: Item;
+  selectedColor: string | null;
   onSizeSelected: (size: string) => void;
 };
-const SizeSelector = ({ sizes, onSizeSelected }: Props) => {
+
+const SizeSelector: React.FC<SizeSelectorProps> = ({
+  item,
+  selectedColor,
+  onSizeSelected,
+}) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [qty, setQty] = useState<number | null>(null);
 
   const handleSizePress = (size: string) => {
     setSelectedSize(size);
     onSizeSelected(size);
   };
 
+  const availableSizes = selectedColor
+    ? item.colors.find((colorObj) => colorObj.color === selectedColor)
+        ?.availableSizes
+    : [];
+
   return (
     <View style={styles.container}>
+      {selectedSize && qty === 1 && (
+        <Animated.Text
+          entering={FadeInDown}
+          exiting={FadeOut}
+          style={{ color: Colors.light.warning, fontSize: 14, marginBottom: 4 }}
+        >
+          Hurry, it's almost sold out
+        </Animated.Text>
+      )}
       <Text style={styles.title}>Select a Size:</Text>
       <View style={styles.sizeContainer}>
-        {sizes.map((size, index) => (
-          <TouchableOpacity
-            key={index}
-            style={[
-              styles.sizeItem,
-              selectedSize === size && styles.selectedSize,
-            ]}
-            onPress={() => handleSizePress(size)}
-          >
-            <Text
+        {availableSizes &&
+          availableSizes.map((sizeObj, index) => (
+            <TouchableOpacity
+              key={index}
               style={[
-                styles.sizeText,
-                selectedSize === size && { fontWeight: "800" },
+                styles.sizeItem,
+                {
+                  backgroundColor: Colors.light.background,
+                  borderColor:
+                    selectedSize === sizeObj.size
+                      ? Colors.light.ascent
+                      : "gray",
+                  borderWidth: selectedSize === sizeObj.size ? 2 : 1,
+                  borderStyle: sizeObj.quantity === 0 ? "dashed" : "solid",
+                },
               ]}
+              onPress={() => {
+                handleSizePress(sizeObj.size);
+                setQty(sizeObj.quantity);
+              }}
+              disabled={sizeObj.quantity === 0}
             >
-              {size}
-            </Text>
-          </TouchableOpacity>
-        ))}
+              <Text
+                style={[
+                  styles.sizeText,
+                  {
+                    fontWeight:
+                      selectedSize === sizeObj.size ? "800" : "normal",
+                  },
+                ]}
+              >
+                {sizeObj.size}
+              </Text>
+            </TouchableOpacity>
+          ))}
       </View>
     </View>
   );
@@ -56,10 +95,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     marginBottom: 10,
+    backgroundColor: Colors.light.background,
   },
   sizeItem: {
     borderWidth: 1,
-    borderColor: "gray",
+    borderColor: "black",
     padding: 10,
     marginHorizontal: 5,
     borderRadius: 5,
@@ -68,12 +108,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   selectedSize: {
-    borderColor: "black",
-    borderWidth: 2,
-  },
-  selectedSizeText: {
-    fontSize: 16,
-    color: "black",
+    marginTop: 10,
+    padding: 10,
+    borderRadius: 10,
   },
 });
 

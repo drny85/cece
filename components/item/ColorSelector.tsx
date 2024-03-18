@@ -1,50 +1,42 @@
+import Colors from "@/constants/Colors";
 import { SIZES } from "@/constants/Sizes";
+import { Item } from "@/typing";
 import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
+const WH = SIZES.width * 0.1;
 type Props = {
-  colors: string[];
-  onColorSelected?: (color: string) => void;
-  small?: boolean;
-  showTitle?: boolean;
+  colors: Item["colors"];
+  onColorSelected: (color: string) => void;
 };
-const ColorSelector = ({
-  colors,
-  onColorSelected,
-  small,
-  showTitle = false,
-}: Props) => {
+const ColorSelector = ({ colors, onColorSelected }: Props) => {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
   const handleColorPress = (color: string) => {
     setSelectedColor(color);
-    if (!onColorSelected) return;
     onColorSelected(color);
   };
 
   return (
     <View style={styles.container}>
-      {showTitle && <Text style={styles.title}>Select a Color:</Text>}
-      <View style={[styles.colorContainer, { gap: small ? 4 : SIZES.padding }]}>
-        {colors.map((color, index) => (
+      <Text style={styles.title}>Select a Color:</Text>
+      <View style={styles.colorContainer}>
+        {colors.map((colorObj, index) => (
           <TouchableOpacity
             key={index}
             style={[
               styles.colorItem,
               {
-                backgroundColor: color,
-                width: small ? 26 : 40,
-                height: small ? 26 : 40,
-                borderRadius: small ? 13 : 20,
-                borderWidth: color === selectedColor ? 2 : undefined,
+                backgroundColor: colorObj.color,
+                borderWidth: selectedColor === colorObj.color ? 3 : undefined,
                 borderColor:
-                  color === selectedColor && selectedColor === "#212121"
-                    ? "red"
-                    : "#212121",
+                  selectedColor === "#fb6f92" ? "black" : Colors.light.ascent,
               },
             ]}
-            onPress={() => handleColorPress(color)}
-          />
+            onPress={() => handleColorPress(colorObj.color)}
+          >
+            <Text style={styles.colorText} />
+          </TouchableOpacity>
         ))}
       </View>
     </View>
@@ -54,33 +46,39 @@ const ColorSelector = ({
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
+    marginBottom: 20,
   },
   title: {
     fontSize: 20,
-    fontWeight: "600",
+    fontWeight: "bold",
     marginBottom: 10,
   },
   colorContainer: {
     flexDirection: "row",
     justifyContent: "center",
     marginBottom: 10,
-    flexWrap: "wrap",
-    //gap: SIZES.padding,
   },
   colorItem: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: WH,
+    height: WH,
+    borderRadius: WH / 2,
     marginHorizontal: 5,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  colorText: {
+    fontSize: 16,
+    color: "white",
   },
   selectedColor: {
     marginTop: 10,
     padding: 10,
     borderRadius: 10,
+    backgroundColor: "lightgray",
   },
   selectedColorText: {
     fontSize: 16,
-    color: "white",
+    color: "black",
   },
 });
 

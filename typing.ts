@@ -15,7 +15,17 @@ export const ItemSchema = z.object({
   price: z.number().positive(),
   image: z.string(),
   available: z.boolean(),
-  colors: z.array(z.string()),
+  colors: z.array(
+    z.object({
+      color: z.string(),
+      availableSizes: z.array(
+        z.object({
+          size: z.nativeEnum(ItemSizes),
+          quantity: z.number().positive(),
+        })
+      ),
+    })
+  ),
   images: z.array(z.string()),
   sizes: z.array(z.nativeEnum(ItemSizes)),
 });

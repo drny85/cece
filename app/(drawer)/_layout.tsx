@@ -1,10 +1,9 @@
 import ShoppingBasket from "@/components/item/ShoppingBasket";
-import { Text, View } from "@/components/Themed";
+import { View } from "@/components/Themed";
 import { SIZES } from "@/constants/Sizes";
-import { FontAwesome, Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { Link, router } from "expo-router";
+import { router } from "expo-router";
 import { Drawer } from "expo-router/drawer";
-import { Pressable, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import Animated, { FadeInUp } from "react-native-reanimated";
 
 const DrawerLayout = () => (

@@ -7,7 +7,35 @@ export const data: Item[] = [
     description: "A hazy day",
     price: 32.99,
     available: true,
-    colors: ["#212121", "#ffffff"],
+    colors: [
+      {
+        color: "#212121",
+        availableSizes: [
+          {
+            size: ItemSizes.S,
+            quantity: 3,
+          },
+          { size: ItemSizes.M, quantity: 2 },
+        ],
+      },
+      {
+        color: "#ffffff",
+        availableSizes: [
+          {
+            size: ItemSizes.S,
+            quantity: 3,
+          },
+          {
+            size: ItemSizes.M,
+            quantity: 2,
+          },
+          {
+            size: ItemSizes.L,
+            quantity: 1,
+          },
+        ],
+      },
+    ],
     category: "Swing",
     tag: "new arrival",
     sizes: [ItemSizes.S, ItemSizes.M],
@@ -18,7 +46,35 @@ export const data: Item[] = [
   {
     id: "2",
     name: "Hazy",
-    colors: ["#212121", "#ffffff"],
+    colors: [
+      {
+        color: "#212121",
+        availableSizes: [
+          {
+            size: ItemSizes.S,
+            quantity: 3,
+          },
+          { size: ItemSizes.M, quantity: 2 },
+        ],
+      },
+      {
+        color: "#ffffff",
+        availableSizes: [
+          {
+            size: ItemSizes.S,
+            quantity: 3,
+          },
+          {
+            size: ItemSizes.M,
+            quantity: 2,
+          },
+          {
+            size: ItemSizes.L,
+            quantity: 1,
+          },
+        ],
+      },
+    ],
     category: "Swing",
     tag: "new arrival",
     description: "A hazy day",
@@ -34,7 +90,35 @@ export const data: Item[] = [
     name: "Hazy",
     description: "A hazy day",
     price: 14.99,
-    colors: ["#212121", "#ffffff"],
+    colors: [
+      {
+        color: "#212121",
+        availableSizes: [
+          {
+            size: ItemSizes.S,
+            quantity: 3,
+          },
+          { size: ItemSizes.M, quantity: 2 },
+        ],
+      },
+      {
+        color: "#ffffff",
+        availableSizes: [
+          {
+            size: ItemSizes.S,
+            quantity: 3,
+          },
+          {
+            size: ItemSizes.M,
+            quantity: 2,
+          },
+          {
+            size: ItemSizes.L,
+            quantity: 1,
+          },
+        ],
+      },
+    ],
     category: "Swing",
     tag: "new arrival",
     available: true,
@@ -48,7 +132,35 @@ export const data: Item[] = [
     name: "Hazy",
     description: "A hazy day",
     price: 17.99,
-    colors: ["#212121", "#ffffff"],
+    colors: [
+      {
+        color: "#212121",
+        availableSizes: [
+          {
+            size: ItemSizes.S,
+            quantity: 3,
+          },
+          { size: ItemSizes.M, quantity: 2 },
+        ],
+      },
+      {
+        color: "#ffffff",
+        availableSizes: [
+          {
+            size: ItemSizes.S,
+            quantity: 3,
+          },
+          {
+            size: ItemSizes.M,
+            quantity: 2,
+          },
+          {
+            size: ItemSizes.L,
+            quantity: 1,
+          },
+        ],
+      },
+    ],
     category: "Swing",
     tag: "new arrival",
     available: true,
@@ -63,7 +175,35 @@ export const data: Item[] = [
     description: "A hazy day",
     price: 24.99,
     available: true,
-    colors: ["#212121", "#ffffff"],
+    colors: [
+      {
+        color: "#212121",
+        availableSizes: [
+          {
+            size: ItemSizes.S,
+            quantity: 3,
+          },
+          { size: ItemSizes.M, quantity: 2 },
+        ],
+      },
+      {
+        color: "#ffffff",
+        availableSizes: [
+          {
+            size: ItemSizes.S,
+            quantity: 3,
+          },
+          {
+            size: ItemSizes.M,
+            quantity: 2,
+          },
+          {
+            size: ItemSizes.L,
+            quantity: 1,
+          },
+        ],
+      },
+    ],
     category: "Swing",
     tag: "new arrival",
     sizes: [ItemSizes.S, ItemSizes.M],
@@ -77,7 +217,35 @@ export const data: Item[] = [
     description: "A hazy day",
     price: 39.99,
     available: true,
-    colors: ["#212121", "#ffffff"],
+    colors: [
+      {
+        color: "#212121",
+        availableSizes: [
+          {
+            size: ItemSizes.S,
+            quantity: 3,
+          },
+          { size: ItemSizes.M, quantity: 2 },
+        ],
+      },
+      {
+        color: "#ffffff",
+        availableSizes: [
+          {
+            size: ItemSizes.S,
+            quantity: 3,
+          },
+          {
+            size: ItemSizes.M,
+            quantity: 2,
+          },
+          {
+            size: ItemSizes.L,
+            quantity: 1,
+          },
+        ],
+      },
+    ],
     category: "Swing",
     tag: "new arrival",
     sizes: [ItemSizes.S, ItemSizes.M],
@@ -87,11 +255,39 @@ export const data: Item[] = [
   },
   {
     id: "7",
-    name: "Hazy",
+    name: "Black V-Nect Bikini Top & High-Rise Retro Bottoms",
     description: "A hazy day",
     price: 18.99,
     available: true,
-    colors: ["#212121", "#ffffff"],
+    colors: [
+      {
+        color: "#212121",
+        availableSizes: [
+          {
+            size: ItemSizes.S,
+            quantity: 3,
+          },
+          { size: ItemSizes.M, quantity: 2 },
+        ],
+      },
+      {
+        color: "#ffffff",
+        availableSizes: [
+          {
+            size: ItemSizes.S,
+            quantity: 3,
+          },
+          {
+            size: ItemSizes.M,
+            quantity: 2,
+          },
+          {
+            size: ItemSizes.L,
+            quantity: 1,
+          },
+        ],
+      },
+    ],
     category: "Swing",
     tag: "new arrival",
     sizes: [ItemSizes.S, ItemSizes.M],
@@ -106,7 +302,35 @@ export const data: Item[] = [
     price: 29.99,
     available: true,
     sizes: [ItemSizes.S, ItemSizes.M, ItemSizes.L],
-    colors: ["#00FFFF", "#FF0000", "#FFFF00", "#FFC0CB", "#800080", "#FFA500"],
+    colors: [
+      {
+        color: "#212121",
+        availableSizes: [
+          {
+            size: ItemSizes.S,
+            quantity: 3,
+          },
+          { size: ItemSizes.M, quantity: 2 },
+        ],
+      },
+      {
+        color: "#ffffff",
+        availableSizes: [
+          {
+            size: ItemSizes.S,
+            quantity: 3,
+          },
+          {
+            size: ItemSizes.M,
+            quantity: 2,
+          },
+          {
+            size: ItemSizes.L,
+            quantity: 1,
+          },
+        ],
+      },
+    ],
     category: "Swing",
     tag: "new arrival",
     images: [],
@@ -120,13 +344,42 @@ export const data: Item[] = [
     price: 19.99,
     available: true,
     colors: [
-      "#00FFFF",
-      "#FF0000",
-      "#008000",
-      "#FFFF00",
-      "#FFC0CB",
-      "#800080",
-      "#FFA500",
+      {
+        color: "#212121",
+        availableSizes: [
+          {
+            size: ItemSizes.S,
+            quantity: 3,
+          },
+          { size: ItemSizes.M, quantity: 2 },
+        ],
+      },
+      {
+        color: "#e76f51",
+        availableSizes: [
+          { size: ItemSizes.S, quantity: 3 },
+          { size: ItemSizes.M, quantity: 3 },
+          { size: ItemSizes.L, quantity: 3 },
+          { size: ItemSizes.XL, quantity: 0 },
+        ],
+      },
+      {
+        color: "#ffffff",
+        availableSizes: [
+          {
+            size: ItemSizes.S,
+            quantity: 0,
+          },
+          {
+            size: ItemSizes.M,
+            quantity: 2,
+          },
+          {
+            size: ItemSizes.L,
+            quantity: 1,
+          },
+        ],
+      },
     ],
     category: "Swing",
     tag: "new arrival",
