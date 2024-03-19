@@ -8,10 +8,12 @@ export enum ItemSizes {
 }
 export const ItemSchema = z.object({
   id: z.string().optional(),
+  percentageOff: z.number().optional(),
   name: z.string(),
   category: z.string(),
-  tag: z.string(),
+  tags: z.array(z.string()),
   description: z.string(),
+  careInstruction: z.string().optional(),
   price: z.number().positive(),
   image: z.string(),
   available: z.boolean(),

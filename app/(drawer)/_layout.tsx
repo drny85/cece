@@ -1,23 +1,25 @@
 import ShoppingBasket from "@/components/item/ShoppingBasket";
 import { View } from "@/components/Themed";
+import Colors from "@/constants/Colors";
 import { SIZES } from "@/constants/Sizes";
+import { FontAwesome } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { Drawer } from "expo-router/drawer";
 import { StyleSheet } from "react-native";
 import Animated, { FadeInUp } from "react-native-reanimated";
 
+const HeaderTitle = ({ title }: { title: string }) => (
+  <Animated.Text
+    style={{ fontSize: 30, fontFamily: "Genos-Bold" }}
+    entering={FadeInUp}
+  >
+    {title}
+  </Animated.Text>
+);
+
 const DrawerLayout = () => (
   <Drawer
-    initialRouteName="index"
     screenOptions={{
-      headerTitle: () => (
-        <Animated.Text
-          style={{ fontSize: 18, fontWeight: "600" }}
-          entering={FadeInUp}
-        >
-          Cece Beachwear
-        </Animated.Text>
-      ),
       headerRight: () => {
         return (
           <View style={{ marginRight: SIZES.margin }}>
@@ -32,16 +34,24 @@ const DrawerLayout = () => (
     }}
   >
     <Drawer.Screen
-      name="index"
+      name="(tabs)"
       options={{
+        headerTitle: () => <HeaderTitle title="Cece Beachwear" />,
         drawerLabel: "Home",
       }}
     />
     <Drawer.Screen
-      name="(tabs)"
+      name="new-in"
       options={{
-        headerTitle: "Tabs",
-        drawerLabel: "Tabs",
+        drawerLabel: "New In",
+        headerTitle: () => <HeaderTitle title="New In" />,
+      }}
+    />
+    <Drawer.Screen
+      name="sales"
+      options={{
+        drawerLabel: "Sales",
+        headerTitle: () => <HeaderTitle title="Sales" />,
       }}
     />
   </Drawer>

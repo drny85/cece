@@ -2,17 +2,25 @@ import Colors from "@/constants/Colors";
 import { PIC } from "@/constants/pics";
 import { SIZES } from "@/constants/Sizes";
 import { Item } from "@/typing";
+import { discountPrice } from "@/utils/discountPrice";
 import { Link } from "expo-router";
 import React from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Animated, { FadeIn } from "react-native-reanimated";
 
 type Props = {
   item: Item;
+  index: number;
 };
 
-const ItemList = ({ item }: Props) => {
+const ItemList = ({ item, index }: Props) => {
+  const discount = item.percentageOff
+    ? discountPrice(item.price, item.percentageOff)
+    : item.price;
+
   return (
-    <View
+    <Animated.View
+      entering={FadeIn.delay(index * 200)}
       style={{
         backgroundColor: Colors.light.white,
         borderRadius: SIZES.radius,
@@ -26,10 +34,13 @@ const ItemList = ({ item }: Props) => {
     >
       <Link
         asChild
-        href={{ pathname: "/item-details", params: { id: item.id! } }}
+        href={{
+          pathname: "/item-details",
+          params: { id: item.id! },
+        }}
       >
         <TouchableOpacity>
-          <Image
+          <Animated.Image
             source={PIC}
             resizeMode="cover"
             style={{
@@ -53,22 +64,47 @@ const ItemList = ({ item }: Props) => {
           {item.name}
         </Text>
 
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <Text style={{ fontSize: 22, fontWeight: "700" }}>${item.price}</Text>
+        <View style={styles.priceContainer}>
+          <View>
+            <Text
+              style={[
+                styles.price,
+                {
+                  fontSize: item.percentageOff ? 16 : 22,
+                  color: item.percentageOff ? Colors.light.gray : "#212121",
+                  textDecorationColor: Colors.light.warning,
+                  textDecorationLine: item.percentageOff
+                    ? "line-through"
+                    : undefined,
+                },
+              ]}
+            >
+              ${item.price}
+            </Text>
+            {item.percentageOff && (
+              <Text style={styles.price}>${discount.toFixed(2)}</Text>
+            )}
+          </View>
+
           <Text style={{ color: Colors.light.gray }}>
             {item.colors.length} colors
           </Text>
         </View>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 
 export default ItemList;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  price: {
+    fontSize: 22,
+    fontWeight: "700",
+  },
+  priceContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+});

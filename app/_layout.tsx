@@ -14,6 +14,11 @@ export const unstable_settings = {
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    Genos: require("../assets/fonts/Genos-Regular.ttf"),
+    "Genos-Bold": require("../assets/fonts/Genos-SemiBold.ttf"),
+    Manjari: require("../assets/fonts/Manjari-Regular.ttf"),
+    "Manjari-Bold": require("../assets/fonts/Manjari-Bold.ttf"),
+    "Manjari-Thin": require("../assets/fonts/Manjari-Thin.ttf"),
     ...FontAwesome.font,
   });
 
@@ -42,23 +47,31 @@ export function RootLayoutNav() {
         <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
         <Stack.Screen
           name="item-details"
-          options={{ presentation: "fullScreenModal", headerShown: false }}
+          options={{
+            presentation: "fullScreenModal",
+            headerShown: false,
+            animation: "fade",
+          }}
         />
         <Stack.Screen
           name="cart"
           options={{
             title: "Shopping Cart",
             presentation: "fullScreenModal",
+            headerTitleStyle: {
+              color: Colors.light.white,
+              fontFamily: "Manjari-Bold",
+            },
             headerShadowVisible: false,
             headerStyle: {
-              backgroundColor: Colors.light.background,
+              backgroundColor: Colors.light.ascent,
             },
             headerLeft: () => (
               <TouchableOpacity>
                 <FontAwesome
                   name="chevron-left"
                   size={24}
-                  color="black"
+                  color={Colors.light.white}
                   onPress={router.back}
                 />
               </TouchableOpacity>

@@ -1,72 +1,147 @@
-import {
-  View,
-  Text,
-  ImageBackground,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
-import React, { useState } from "react";
+import AddToCart from "@/components/item/AddToCart";
+import ColorSelector from "@/components/item/ColorSelector";
+import ShoppingBasket from "@/components/item/ShoppingBasket";
+import SizeSelector from "@/components/item/SizeSelector";
+import Colors from "@/constants/Colors";
 import { PIC } from "@/constants/pics";
 import { SIZES } from "@/constants/Sizes";
-import { StatusBar } from "expo-status-bar";
-import { router, useLocalSearchParams } from "expo-router";
-import { FontAwesome } from "@expo/vector-icons";
-import Colors from "@/constants/Colors";
 import { useItem } from "@/hooks/item/useItem";
-import ColorSelector from "@/components/item/ColorSelector";
-import SizeSelector from "@/components/item/SizeSelector";
-import Animated, { FadeInUp } from "react-native-reanimated";
-import AddToCart from "@/components/item/AddToCart";
+import { CartItem, useCartStore } from "@/services/cart";
+import { Item } from "@/typing";
+import { discountPrice } from "@/utils/discountPrice";
+import { FontAwesome } from "@expo/vector-icons";
+import { router, useLocalSearchParams } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
+import {
+  Alert,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import Animated, {
+  FadeIn,
+  FadeInDown,
+  FadeInUp,
+} from "react-native-reanimated";
 
 const modal = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
+  const addToCart = useCartStore((s) => s.addToCart);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const btnDisabled = selectedColor === null || selectedSize === null;
   const { item, loading } = useItem(id);
-  if (loading) return null;
+  if (loading || !item) return null;
+  const discount = item.percentageOff
+    ? discountPrice(item.price, item.percentageOff)
+    : item.price;
+
+  const handleAddToCart = () => {
+    if (btnDisabled) {
+      Alert.alert("Please select a color and size");
+      return;
+    }
+    const newItem: CartItem = {
+      id: new Date().getTime().toString(),
+      item,
+      color: selectedColor,
+      size: selectedSize,
+      quantity: 1,
+      total: discount,
+    };
+
+    addToCart(newItem);
+    router.push("/cart");
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <StatusBar style="light" />
-      <ImageBackground source={PIC} resizeMode="cover" style={styles.image}>
-        <TouchableOpacity style={styles.back} onPress={router.back}>
+      <Animated.View style={{ flex: 0.4 }} entering={FadeIn}>
+        <Animated.Image
+          entering={FadeIn}
+          source={PIC}
+          resizeMode="cover"
+          style={styles.image}
+        />
+      </Animated.View>
+      <View style={styles.back}>
+        <TouchableOpacity style={styles.btnBack} onPress={router.back}>
           <FontAwesome
             name="chevron-left"
             size={26}
             color={Colors.light.white}
           />
         </TouchableOpacity>
-      </ImageBackground>
-      <ScrollView contentContainerStyle={{ padding: SIZES.padding }}>
-        <View>
-          <View style={{ paddingVertical: SIZES.padding, gap: SIZES.padding }}>
-            <Text style={styles.name}>{item?.name}</Text>
+        <ShoppingBasket
+          color={Colors.light.ascent}
+          onPress={() => {
+            router.push("/cart");
+          }}
+        />
+      </View>
 
-            <Text style={styles.price}>${item?.price}</Text>
+      <Animated.View
+        entering={FadeInDown.duration(600)}
+        style={{ flex: 0.5 }}
+        exiting={FadeInUp.duration(400)}
+      >
+        <ScrollView contentContainerStyle={{ padding: SIZES.padding }}>
+          <View>
+            <View
+              style={{ paddingVertical: SIZES.padding, gap: SIZES.padding }}
+            >
+              <Text style={styles.name}>{item?.name}</Text>
+
+              <View>
+                <Text
+                  style={[
+                    styles.price,
+                    {
+                      fontSize: item.percentageOff ? 16 : 22,
+                      color: item.percentageOff ? Colors.light.gray : "#212121",
+                      textDecorationColor: Colors.light.warning,
+                      textDecorationLine: item.percentageOff
+                        ? "line-through"
+                        : undefined,
+                    },
+                  ]}
+                >
+                  ${item.price}
+                </Text>
+                {item.percentageOff && (
+                  <Text style={styles.price}>${discount.toFixed(2)}</Text>
+                )}
+              </View>
+            </View>
+            <View style={{ width: "100%" }}>
+              <ColorSelector
+                colors={item?.colors!}
+                onColorSelected={(color) => {
+                  setSelectedColor(color);
+                }}
+              />
+              {selectedColor && (
+                <Animated.View entering={FadeInUp}>
+                  <SizeSelector
+                    item={item!}
+                    selectedColor={selectedColor}
+                    onSizeSelected={(size) => {
+                      setSelectedSize(size);
+                    }}
+                  />
+                </Animated.View>
+              )}
+            </View>
+            <View>
+              <Text style={styles.desc}>{item?.description}</Text>
+            </View>
           </View>
-          <View style={{ width: "100%" }}>
-            <ColorSelector
-              colors={item?.colors!}
-              onColorSelected={(color) => {
-                setSelectedColor(color);
-              }}
-            />
-            {selectedColor && (
-              <Animated.View entering={FadeInUp}>
-                <SizeSelector
-                  item={item!}
-                  selectedColor={selectedColor}
-                  onSizeSelected={(size) => {
-                    setSelectedSize(size);
-                  }}
-                />
-              </Animated.View>
-            )}
-          </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </Animated.View>
       <View style={styles.btn}>
         <AddToCart
           onPressFavorite={() => {}}
@@ -80,7 +155,7 @@ const modal = () => {
               return;
             }
             console.log(selectedColor, selectedSize);
-            router.push("/cart");
+            handleAddToCart();
           }}
           disabled={btnDisabled}
         />
@@ -93,7 +168,8 @@ export default modal;
 
 const styles = StyleSheet.create({
   image: {
-    height: SIZES.height * 0.4,
+    height: "100%",
+    width: "100%",
   },
   btn: {
     position: "absolute",
@@ -102,6 +178,20 @@ const styles = StyleSheet.create({
     zIndex: 30,
     alignSelf: "center",
   },
+  btnBack: {
+    padding: SIZES.basic,
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.3)",
+  },
+  desc: {
+    fontFamily: "Manjari-Thin",
+    fontSize: 16,
+    lineHeight: 24,
+  },
   name: {
     color: Colors.light.gray,
     fontSize: 18,
@@ -109,8 +199,12 @@ const styles = StyleSheet.create({
   },
   back: {
     position: "absolute",
+    flexDirection: "row",
     top: SIZES.statusBarHeight,
-    left: 20,
+    justifyContent: "space-between",
+    paddingHorizontal: SIZES.padding,
+    alignItems: "center",
+    width: "100%",
     zIndex: 10,
   },
   price: {

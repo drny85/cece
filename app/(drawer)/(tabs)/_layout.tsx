@@ -1,3 +1,4 @@
+import Colors from "@/constants/Colors";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Tabs } from "expo-router";
 import { StyleSheet } from "react-native";
@@ -14,7 +15,7 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: "black",
+        tabBarActiveTintColor: Colors.light.ascent,
       }}
     >
       <Tabs.Screen

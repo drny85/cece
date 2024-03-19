@@ -6,6 +6,7 @@ export const data: Item[] = [
     name: "Hazy",
     description: "A hazy day",
     price: 32.99,
+    percentageOff: 50,
     available: true,
     colors: [
       {
@@ -37,7 +38,7 @@ export const data: Item[] = [
       },
     ],
     category: "Swing",
-    tag: "new arrival",
+    tags: ["new arrival", "new in"],
     sizes: [ItemSizes.S, ItemSizes.M],
     images: [],
     image:
@@ -76,7 +77,7 @@ export const data: Item[] = [
       },
     ],
     category: "Swing",
-    tag: "new arrival",
+    tags: ["new arrival", "new in"],
     description: "A hazy day",
     price: 9.99,
     available: true,
@@ -120,7 +121,7 @@ export const data: Item[] = [
       },
     ],
     category: "Swing",
-    tag: "new arrival",
+    tags: ["new arrival"],
     available: true,
     sizes: [ItemSizes.S, ItemSizes.M],
     images: [],
@@ -162,7 +163,7 @@ export const data: Item[] = [
       },
     ],
     category: "Swing",
-    tag: "new arrival",
+    tags: ["new arrival"],
     available: true,
     sizes: [ItemSizes.S, ItemSizes.M],
     images: [],
@@ -205,7 +206,7 @@ export const data: Item[] = [
       },
     ],
     category: "Swing",
-    tag: "new arrival",
+    tags: ["new arrival"],
     sizes: [ItemSizes.S, ItemSizes.M],
     images: [],
     image:
@@ -247,7 +248,7 @@ export const data: Item[] = [
       },
     ],
     category: "Swing",
-    tag: "new arrival",
+    tags: ["new arrival"],
     sizes: [ItemSizes.S, ItemSizes.M],
     images: [],
     image:
@@ -256,7 +257,8 @@ export const data: Item[] = [
   {
     id: "7",
     name: "Black V-Nect Bikini Top & High-Rise Retro Bottoms",
-    description: "A hazy day",
+    description:
+      "Elevate your beach style with our Beach Vibes Swim Shorts, designed for ultimate comfort and style under the sun. Crafted from quick-drying and lightweight fabric, these swim shorts are perfect for a day at the beach or lounging poolside.",
     price: 18.99,
     available: true,
     colors: [
@@ -289,7 +291,7 @@ export const data: Item[] = [
       },
     ],
     category: "Swing",
-    tag: "new arrival",
+    tags: ["new in"],
     sizes: [ItemSizes.S, ItemSizes.M],
     images: [],
     image:
@@ -298,7 +300,8 @@ export const data: Item[] = [
   {
     id: "8",
     name: "Hazy",
-    description: "A hazy day",
+    description:
+      "Elevate your beach style with our Beach Vibes Swim Shorts, designed for ultimate comfort and style under the sun. Crafted from quick-drying and lightweight fabric, these swim shorts are perfect for a day at the beach or lounging poolside.",
     price: 29.99,
     available: true,
     sizes: [ItemSizes.S, ItemSizes.M, ItemSizes.L],
@@ -332,15 +335,16 @@ export const data: Item[] = [
       },
     ],
     category: "Swing",
-    tag: "new arrival",
+    tags: ["new in"],
     images: [],
     image:
       "https://cdn-review.cupshe.com/cmc-admin/2023_12_29/13_56_570/1651ce1d-0aa1-4785-901b-ffc62ca721d4/CAA12E3M067AA/1.jpg?x-oss-process=image/format,avif/quality,q_100/resize,w_1500",
   },
   {
     id: "9",
-    name: "Hazy",
-    description: "A hazy day",
+    name: "Beach Vibes Swim Shorts",
+    description:
+      "Elevate your beach style with our Beach Vibes Swim Shorts, designed for ultimate comfort and style under the sun. Crafted from quick-drying and lightweight fabric, these swim shorts are perfect for a day at the beach or lounging poolside.",
     price: 19.99,
     available: true,
     colors: [
@@ -382,7 +386,10 @@ export const data: Item[] = [
       },
     ],
     category: "Swing",
-    tag: "new arrival",
+    percentageOff: 25,
+    tags: ["new in"],
+    careInstruction:
+      "Machine wash cold, gentle cycle. Do not bleach. Tumble dry low. Cool iron if needed. Do not dry clean.",
     sizes: [ItemSizes.S, ItemSizes.M, ItemSizes.XL],
     images: [],
     image:

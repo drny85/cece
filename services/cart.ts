@@ -1,14 +1,16 @@
 import { Item } from "@/typing";
 import { create } from "zustand";
 
-type CartItem = {
+export type CartItem = {
   id: string;
   item: Item;
+  color: string;
+  size: string;
   total: number;
   quantity: number;
 };
 
-type CartStore = {
+export type CartStore = {
   items: CartItem[];
   addToCart: (product: CartItem) => void;
   removeFromCart: (productId: string) => void;
