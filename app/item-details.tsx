@@ -75,6 +75,7 @@ const modal = () => {
           />
         </TouchableOpacity>
         <ShoppingBasket
+          containerStyle={{ marginRight: SIZES.basic }}
           color={Colors.light.ascent}
           onPress={() => {
             router.push("/cart");

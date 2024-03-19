@@ -10,7 +10,11 @@ import Animated, { FadeInUp } from "react-native-reanimated";
 
 const HeaderTitle = ({ title }: { title: string }) => (
   <Animated.Text
-    style={{ fontSize: 30, fontFamily: "Genos-Bold" }}
+    style={{
+      fontSize: 30,
+      fontFamily: "Genos-Bold",
+      color: Colors.light.white,
+    }}
     entering={FadeInUp}
   >
     {title}
@@ -20,15 +24,17 @@ const HeaderTitle = ({ title }: { title: string }) => (
 const DrawerLayout = () => (
   <Drawer
     screenOptions={{
+      headerStyle: {
+        backgroundColor: Colors.light.ascent,
+      },
       headerRight: () => {
         return (
-          <View style={{ marginRight: SIZES.margin }}>
-            <ShoppingBasket
-              onPress={() => {
-                router.push("/cart");
-              }}
-            />
-          </View>
+          <ShoppingBasket
+            containerStyle={{ marginRight: SIZES.padding * 1.5 }}
+            onPress={() => {
+              router.push("/cart");
+            }}
+          />
         );
       },
     }}
@@ -38,6 +44,9 @@ const DrawerLayout = () => (
       options={{
         headerTitle: () => <HeaderTitle title="Cece Beachwear" />,
         drawerLabel: "Home",
+        headerStyle: {
+          backgroundColor: Colors.light.ascent,
+        },
       }}
     />
     <Drawer.Screen

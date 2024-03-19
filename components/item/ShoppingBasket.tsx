@@ -3,32 +3,45 @@ import { useCartStore } from "@/services/cart";
 import { calculateTotalItemsInCart } from "@/utils/calculateTotalItemsInCart";
 import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import {
+  StyleProp,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from "react-native";
 
 type Props = {
   onPress: () => void;
   color?: string;
+  containerStyle?: StyleProp<ViewStyle>;
 };
-const ShoppingBasket = ({ onPress, color }: Props) => {
+const ShoppingBasket = ({ onPress, color, containerStyle }: Props) => {
   const items = useCartStore((s) => s.items);
 
   return (
-    <TouchableOpacity style={{ position: "relative" }} onPress={onPress}>
-      <FontAwesome name="shopping-bag" size={26} color={color || "#212121"} />
+    <TouchableOpacity style={containerStyle} onPress={onPress}>
+      <FontAwesome name="shopping-bag" size={30} color={color || "#212121"} />
       <View
         style={{
-          height: 20,
-          width: 20,
-          borderRadius: 10,
+          height: 22,
+          width: 22,
+          borderRadius: 11,
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: Colors.light.ascent,
+          backgroundColor: Colors.light.white,
           position: "absolute",
           top: -7,
           right: -8,
         }}
       >
-        <Text style={{ color: Colors.light.white, fontWeight: "700" }}>
+        <Text
+          style={{
+            color: Colors.light.ascent,
+            fontWeight: "bold",
+            fontSize: 18,
+          }}
+        >
           {calculateTotalItemsInCart(items)}
         </Text>
       </View>

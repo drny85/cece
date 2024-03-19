@@ -46,13 +46,44 @@ export function RootLayoutNav() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Stack>
-        <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="(drawer)"
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name="item-details"
           options={{
             presentation: "fullScreenModal",
             headerShown: false,
-            animation: "fade",
+          }}
+        />
+        <Stack.Screen
+          name="checkout"
+          options={{
+            title: "Checkout",
+            presentation: "fullScreenModal",
+            headerTitleStyle: {
+              color: Colors.light.white,
+              fontFamily: "Manjari-Bold",
+              fontSize: 22,
+            },
+            headerShadowVisible: false,
+            headerStyle: {
+              backgroundColor: Colors.light.ascent,
+            },
+            headerLeft: () => (
+              <TouchableOpacity>
+                <FontAwesome
+                  name="chevron-left"
+                  size={24}
+                  color={Colors.light.white}
+                  onPress={router.back}
+                />
+              </TouchableOpacity>
+            ),
+            //headerShown: false,
           }}
         />
         <Stack.Screen

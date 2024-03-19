@@ -37,7 +37,7 @@ const ItemsPage = ({ items }: Props) => {
       }
       numColumns={2}
       contentContainerStyle={{
-        gap: SIZES.padding,
+        gap: SIZES.padding * 1.5,
         alignSelf: "center",
         paddingTop: SIZES.padding,
       }}

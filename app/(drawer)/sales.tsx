@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import React from "react";
 import ItemsPage from "@/components/item/ItemsPage";
 import { data } from "@/data";
