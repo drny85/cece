@@ -1,3 +1,6 @@
-export const discountPrice = (price: number, discount: number) => {
-  return price - price * (discount / 100);
+import { Item } from "@/typing";
+export const discountPrice = (item: Item) => {
+  return item.percentageOff
+    ? item.price - item.price * (item.percentageOff / 100)
+    : item.price;
 };

@@ -3,7 +3,7 @@ import ColorSelector from "@/components/item/ColorSelector";
 import ShoppingBasket from "@/components/item/ShoppingBasket";
 import SizeSelector from "@/components/item/SizeSelector";
 import Colors from "@/constants/Colors";
-import { PIC } from "@/constants/pics";
+import { PIC, PIC2 } from "@/constants/pics";
 import { SIZES } from "@/constants/Sizes";
 import { useItem } from "@/hooks/item/useItem";
 import { CartItem, useCartStore } from "@/services/cart";
@@ -35,9 +35,6 @@ const modal = () => {
   const btnDisabled = selectedColor === null || selectedSize === null;
   const { item, loading } = useItem(id);
   if (loading || !item) return null;
-  const discount = item.percentageOff
-    ? discountPrice(item.price, item.percentageOff)
-    : item.price;
 
   const handleAddToCart = () => {
     if (btnDisabled) {
@@ -50,20 +47,21 @@ const modal = () => {
       color: selectedColor,
       size: selectedSize,
       quantity: 1,
-      total: discount,
+      total: discountPrice(item),
     };
 
     addToCart(newItem);
     router.push("/cart");
   };
 
+  const pic = parseInt(id) % 2 === 0 ? PIC : PIC2;
   return (
     <View style={{ flex: 1 }}>
       <StatusBar style="light" />
       <Animated.View style={{ flex: 0.4 }} entering={FadeIn}>
         <Animated.Image
           entering={FadeIn}
-          source={PIC}
+          source={pic}
           resizeMode="cover"
           style={styles.image}
         />
@@ -113,7 +111,9 @@ const modal = () => {
                   ${item.price}
                 </Text>
                 {item.percentageOff && (
-                  <Text style={styles.price}>${discount.toFixed(2)}</Text>
+                  <Text style={styles.price}>
+                    ${discountPrice(item).toFixed(2)}
+                  </Text>
                 )}
               </View>
             </View>

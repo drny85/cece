@@ -1,5 +1,5 @@
 import Colors from "@/constants/Colors";
-import { PIC } from "@/constants/pics";
+import { PIC, PIC2 } from "@/constants/pics";
 import { SIZES } from "@/constants/Sizes";
 import { Item } from "@/typing";
 import { discountPrice } from "@/utils/discountPrice";
@@ -14,10 +14,7 @@ type Props = {
 };
 
 const ItemList = ({ item, index }: Props) => {
-  const discount = item.percentageOff
-    ? discountPrice(item.price, item.percentageOff)
-    : item.price;
-
+  const pic = parseInt(item?.id!) % 2 === 0 ? PIC : PIC2;
   return (
     <Animated.View
       entering={FadeIn.delay(index * 200)}
@@ -41,7 +38,7 @@ const ItemList = ({ item, index }: Props) => {
       >
         <TouchableOpacity>
           <Animated.Image
-            source={PIC}
+            source={pic}
             resizeMode="cover"
             style={{
               width: "100%",
@@ -82,7 +79,9 @@ const ItemList = ({ item, index }: Props) => {
               ${item.price}
             </Text>
             {item.percentageOff && (
-              <Text style={styles.price}>${discount.toFixed(2)}</Text>
+              <Text style={styles.price}>
+                ${discountPrice(item).toFixed(2)}
+              </Text>
             )}
           </View>
 

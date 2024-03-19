@@ -1,10 +1,11 @@
 import Colors from "@/constants/Colors";
+import { useCartStore } from "@/services/cart";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFonts } from "expo-font";
 import { router, Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
-import { TouchableOpacity } from "react-native";
+import { Alert, Text, TouchableOpacity } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
@@ -41,6 +42,7 @@ export default function RootLayout() {
 }
 
 export function RootLayoutNav() {
+  const { clearCart, items } = useCartStore();
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Stack>
@@ -61,6 +63,7 @@ export function RootLayoutNav() {
             headerTitleStyle: {
               color: Colors.light.white,
               fontFamily: "Manjari-Bold",
+              fontSize: 22,
             },
             headerShadowVisible: false,
             headerStyle: {
@@ -74,6 +77,21 @@ export function RootLayoutNav() {
                   color={Colors.light.white}
                   onPress={router.back}
                 />
+              </TouchableOpacity>
+            ),
+            headerRight: () => (
+              <TouchableOpacity
+                disabled={items.length === 0}
+                onPress={() => {
+                  Alert.alert("Empty Cart", "Do you want to empty the cart?", [
+                    { text: "Cancel", style: "cancel" },
+                    { text: "Yes", style: "destructive", onPress: clearCart },
+                  ]);
+                }}
+              >
+                <Text style={{ fontFamily: "Genos-Bold", fontSize: 20 }}>
+                  Clear
+                </Text>
               </TouchableOpacity>
             ),
           }}

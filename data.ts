@@ -41,8 +41,7 @@ export const data: Item[] = [
     tags: ["new arrival", "new in"],
     sizes: [ItemSizes.S, ItemSizes.M],
     images: [],
-    image:
-      "https://cdn-review.cupshe.com/cmc-admin/2023_12_29/13_56_570/1651ce1d-0aa1-4785-901b-ffc62ca721d4/CAA12E3M067AA/1.jpg?x-oss-process=image/format,avif/quality,q_100/resize,w_1500",
+    image: "",
   },
   {
     id: "2",
@@ -75,21 +74,39 @@ export const data: Item[] = [
           },
         ],
       },
+      {
+        color: "#2d00f7",
+        availableSizes: [
+          {
+            size: ItemSizes.S,
+            quantity: 3,
+          },
+          {
+            size: ItemSizes.M,
+            quantity: 2,
+          },
+          {
+            size: ItemSizes.L,
+            quantity: 1,
+          },
+        ],
+      },
     ],
     category: "Swing",
     tags: ["new arrival", "new in"],
-    description: "A hazy day",
+    description:
+      "Elevate your beach style with our Beach Vibes Swim Shorts, designed for ultimate comfort and style under the sun. Crafted from quick-drying and lightweight fabric, these swim shorts are perfect for a day at the beach or lounging poolside.",
     price: 9.99,
     available: true,
     sizes: [ItemSizes.S, ItemSizes.M],
     images: [],
-    image:
-      "https://cdn-review.cupshe.com/cmc-admin/2023_12_29/13_56_570/1651ce1d-0aa1-4785-901b-ffc62ca721d4/CAA12E3M067AA/1.jpg?x-oss-process=image/format,avif/quality,q_100/resize,w_1500",
+    image: "",
   },
   {
     id: "3",
     name: "Hazy",
-    description: "A hazy day",
+    description:
+      "Elevate your beach style with our Beach Vibes Swim Shorts, designed for ultimate comfort and style under the sun. Crafted from quick-drying and lightweight fabric, these swim shorts are perfect for a day at the beach or lounging poolside.",
     price: 14.99,
     colors: [
       {
@@ -125,13 +142,13 @@ export const data: Item[] = [
     available: true,
     sizes: [ItemSizes.S, ItemSizes.M],
     images: [],
-    image:
-      "https://cdn-review.cupshe.com/cmc-admin/2023_12_29/13_56_570/1651ce1d-0aa1-4785-901b-ffc62ca721d4/CAA12E3M067AA/1.jpg?x-oss-process=image/format,avif/quality,q_100/resize,w_1500",
+    image: "",
   },
   {
     id: "4",
     name: "Hazy",
-    description: "A hazy day",
+    description:
+      "Elevate your beach style with our Beach Vibes Swim Shorts, designed for ultimate comfort and style under the sun. Crafted from quick-drying and lightweight fabric, these swim shorts are perfect for a day at the beach or lounging poolside.",
     price: 17.99,
     colors: [
       {
@@ -167,13 +184,13 @@ export const data: Item[] = [
     available: true,
     sizes: [ItemSizes.S, ItemSizes.M],
     images: [],
-    image:
-      "https://cdn-review.cupshe.com/cmc-admin/2023_12_29/13_56_570/1651ce1d-0aa1-4785-901b-ffc62ca721d4/CAA12E3M067AA/1.jpg?x-oss-process=image/format,avif/quality,q_100/resize,w_1500",
+    image: "",
   },
   {
     id: "5",
-    name: "Hazy",
-    description: "A hazy day",
+    name: "Swim Shorts",
+    description:
+      "Elevate your beach style with our Beach Vibes Swim Shorts, designed for ultimate comfort and style under the sun. Crafted from quick-drying and lightweight fabric, these swim shorts are perfect for a day at the beach or lounging poolside.",
     price: 24.99,
     available: true,
     colors: [
@@ -209,8 +226,7 @@ export const data: Item[] = [
     tags: ["new arrival"],
     sizes: [ItemSizes.S, ItemSizes.M],
     images: [],
-    image:
-      "https://cdn-review.cupshe.com/cmc-admin/2023_12_29/13_56_570/1651ce1d-0aa1-4785-901b-ffc62ca721d4/CAA12E3M067AA/1.jpg?x-oss-process=image/format,avif/quality,q_100/resize,w_1500",
+    image: "",
   },
   {
     id: "6",
@@ -251,8 +267,7 @@ export const data: Item[] = [
     tags: ["new arrival"],
     sizes: [ItemSizes.S, ItemSizes.M],
     images: [],
-    image:
-      "https://cdn-review.cupshe.com/cmc-admin/2023_12_29/13_56_570/1651ce1d-0aa1-4785-901b-ffc62ca721d4/CAA12E3M067AA/1.jpg?x-oss-process=image/format,avif/quality,q_100/resize,w_1500",
+    image: "",
   },
   {
     id: "7",
@@ -294,8 +309,7 @@ export const data: Item[] = [
     tags: ["new in"],
     sizes: [ItemSizes.S, ItemSizes.M],
     images: [],
-    image:
-      "https://cdn-review.cupshe.com/cmc-admin/2023_12_29/13_56_570/1651ce1d-0aa1-4785-901b-ffc62ca721d4/CAA12E3M067AA/1.jpg?x-oss-process=image/format,avif/quality,q_100/resize,w_1500",
+    image: "",
   },
   {
     id: "8",
@@ -337,8 +351,7 @@ export const data: Item[] = [
     category: "Swing",
     tags: ["new in"],
     images: [],
-    image:
-      "https://cdn-review.cupshe.com/cmc-admin/2023_12_29/13_56_570/1651ce1d-0aa1-4785-901b-ffc62ca721d4/CAA12E3M067AA/1.jpg?x-oss-process=image/format,avif/quality,q_100/resize,w_1500",
+    image: "",
   },
   {
     id: "9",
@@ -386,13 +399,12 @@ export const data: Item[] = [
       },
     ],
     category: "Swing",
-    percentageOff: 25,
+    percentageOff: 20,
     tags: ["new in"],
     careInstruction:
       "Machine wash cold, gentle cycle. Do not bleach. Tumble dry low. Cool iron if needed. Do not dry clean.",
     sizes: [ItemSizes.S, ItemSizes.M, ItemSizes.XL],
     images: [],
-    image:
-      "https://cdn-review.cupshe.com/cmc-admin/2023_12_29/13_56_570/1651ce1d-0aa1-4785-901b-ffc62ca721d4/CAA12E3M067AA/1.jpg?x-oss-process=image/format,avif/quality,q_100/resize,w_1500",
+    image: "",
   },
 ];
